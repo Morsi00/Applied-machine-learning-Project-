@@ -90,13 +90,13 @@ run index.html
 
 ## 👥 The Team
 
-| Name | Role | Primary Contribution |
-| :--- | :--- | :--- |
-| **Mohamed Hatem** | Team Leader | SOM Implementation & Data Visualization |
-| **Ahmed Morsi** | Data Engineer | Preprocessing, UI Development |
-| **Ibrahim Mohamed** | ML Engineer | K-Means Clustering & Behavioral Analysis |
-| **Elsayed Abdelsamea** | ML Engineer | DBSCAN & Outlier Detection |
-| **Ahmed Karem** | DL Researcher | Graph Autoencoder & Latent Representation |
+| Name | Primary Contribution |
+| :--- |  :--- |
+| **Mohamed Hatem** |  SOM Implementation & Data Visualization |
+| **Ahmed Morsi** |  Preprocessing, UI Development |
+| **Ibrahim Mohamed** |  K-Means Clustering & Behavioral Analysis |
+| **Elsayed Abdelsamea** |  DBSCAN & Outlier Detection |
+| **Ahmed Karem** |  Graph Autoencoder & Latent Representation |
 
 ---
 
