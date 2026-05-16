@@ -76,6 +76,9 @@ Our analysis yielded several critical findings for the business:
 ```bash
 pip install kagglehub pandas numpy matplotlib seaborn scikit-learn minisom torch
 ```
+```bash
+run index.html 
+```
 
 ### Execution
 1. Clone this repository.
@@ -87,7 +90,6 @@ pip install kagglehub pandas numpy matplotlib seaborn scikit-learn minisom torch
 
 ## 👥 The Team
 
-![Team Icon](https://private-us-east-1.manuscdn.com/sessionFile/UR9EK5O09Wt6Hu0Z9QKQoO/sandbox/wW3SZdjYNrUD0fVE53lU6a-images_1778918908439_na1fn_L2hvbWUvdWJ1bnR1L3RlYW1faWNvbg.png?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvVVI5RUs1TzA5V3Q2SHUwWjlRS1FvTy9zYW5kYm94L3dXM1NaZGpZTnJVRDBmVkU1M2xVNmEtaW1hZ2VzXzE3Nzg5MTg5MDg0MzlfbmExZm5fTDJodmJXVXZkV0oxYm5SMUwzUmxZVzFmYVdOdmJnLnBuZyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=hkEEj9srK7hASY54-DgJUHdPMB0U6Z6yGjHYFh8HMwJJb9g6kPKJPcdB4kCqYnCM5GGU8jj4cK3WXibkTQ2yx7erPF9QolXQAzEgELvbCqN9UMnjU5Fme3D6o0700ummIWo9zkEQrXSNXgQlJKCOTBjmmH7fTdBsEiM5XBHKsdQ~tUfCoxeIRhV6jtp7Zb1zUIzq7wbWNNFesJbAwovKHjs3Qzad7N770gndljrIEEOTU6dFjwhsrazEjsVSOBcbCM-stxgT7EAYIB0VMU6WdfJ3m6sLUY8WtwxZgwFeETL8R7BdjF1Nh-vIxb58QiV38pPP-bGjMyfsR7wOEuqJww__)
 
 | Name | Role | Primary Contribution |
 | :--- | :--- | :--- |
