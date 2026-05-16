@@ -90,8 +90,6 @@ run index.html
 
 ## 👥 The Team
 
-![Team Icon]
-
 | Name | Role | Primary Contribution |
 | :--- | :--- | :--- |
 | **Mohamed Hatem** | Team Leader | SOM Implementation & Data Visualization |
