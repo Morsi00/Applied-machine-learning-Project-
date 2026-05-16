@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Churn Analysis Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="styles1.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Churn Analysis</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="data">
+                    <i class="fas fa-database"></i>
+                    <span>البيانات</span>
+                </a>
+                <a href="#" class="nav-item" data-section="cleaning">
+                    <i class="fas fa-broom"></i>
+                    <span>تنظيف البيانات</span>
+                </a>
+                <a href="#" class="nav-item" data-section="models">
+                    <i class="fas fa-brain"></i>
+                    <span>النماذج</span>
+                </a>
+                <a href="#" class="nav-item" data-section="team">
+                    <i class="fas fa-users"></i>
+                    <span>الفريق</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <!-- Data Section -->
+            <section id="data" class="content-section active">
+                <!-- Header -->
+                <div class="header">
+                    <div class="header-content">
+                        <h1>تحليل تجزئة العملاء ومخاطر التوقف</h1>
+                        <p class="subtitle">Customer Segmentation & Churn Risk Analysis</p>
+                    </div>
+                    <div class="header-stats">
+                        <div class="stat-card">
+                            <span class="stat-label">عدد العملاء</span>
+                            <span class="stat-value">7,043</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-label">معدل التوقف</span>
+                            <span class="stat-value">26.5%</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-label">الأعمدة</span>
+                            <span class="stat-value">20</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <h2>معلومات البيانات</h2>
+                    <p>تفاصيل شاملة عن مجموعة البيانات المستخدمة في المشروع</p>
+                </div>
+
+                <div class="data-overview">
+                    <div class="overview-card">
+                        <h3>نظرة عامة على البيانات</h3>
+                        <div class="overview-content">
+                            <div class="overview-item">
+                                <span class="label">مصدر البيانات:</span>
+                                <span class="value">IBM Sample Data Sets - Telco Customer Churn</span>
+                            </div>
+                            <div class="overview-item">
+                                <span class="label">عدد الصفوف:</span>
+                                <span class="value">7,043 عميل</span>
+                            </div>
+                            <div class="overview-item">
+                                <span class="label">عدد الأعمدة:</span>
+                                <span class="value">21 عمود (20 بعد الحذف)</span>
+                            </div>
+                            <div class="overview-item">
+                                <span class="label">نوع البيانات:</span>
+                                <span class="value">بيانات تصنيفية وعددية مختلطة</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <h3>المتغير المستهدف (Target)</h3>
+                        <div class="overview-content">
+                            <div class="overview-item">
+                                <span class="label">Churn:</span>
+                                <span class="value">يشير إلى ما إذا ترك العميل الخدمة في الشهر الأخير (نعم/لا)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-categories">
+                    <div class="category-card">
+                        <div class="category-header">
+                            <h3>المعلومات الديموغرافية</h3>
+                            <span class="count">4 أعمدة</span>
+                        </div>
+                        <ul class="category-list">
+                            <li><strong>Gender:</strong> جنس العميل (ذكر/أنثى)</li>
+                            <li><strong>SeniorCitizen:</strong> هل العميل من كبار السن (1/0)</li>
+                            <li><strong>Partner:</strong> هل للعميل شريك (نعم/لا)</li>
+                            <li><strong>Dependents:</strong> هل للعميل معالون (نعم/لا)</li>
+                        </ul>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-header">
+                            <h3>الخدمات المشتركة</h3>
+                            <span class="count">9 أعمدة</span>
+                        </div>
+                        <ul class="category-list">
+                            <li><strong>PhoneService:</strong> خدمة الهاتف</li>
+                            <li><strong>MultipleLines:</strong> خطوط متعددة</li>
+                            <li><strong>InternetService:</strong> مزود خدمة الإنترنت (DSL/Fiber/لا)</li>
+                            <li><strong>OnlineSecurity:</strong> الأمان عبر الإنترنت</li>
+                            <li><strong>OnlineBackup:</strong> النسخ الاحتياطي عبر الإنترنت</li>
+                            <li><strong>DeviceProtection:</strong> حماية الأجهزة</li>
+                            <li><strong>TechSupport:</strong> الدعم الفني</li>
+                            <li><strong>StreamingTV:</strong> بث التلفزيون</li>
+                            <li><strong>StreamingMovies:</strong> بث الأفلام</li>
+                        </ul>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-header">
+                            <h3>معلومات الحساب</h3>
+                            <span class="count">6 أعمدة</span>
+                        </div>
+                        <ul class="category-list">
+                            <li><strong>Tenure:</strong> عدد الأشهر التي بقي فيها العميل</li>
+                            <li><strong>Contract:</strong> نوع العقد (شهري/سنة/سنتين)</li>
+                            <li><strong>PaperlessBilling:</strong> الفوترة الإلكترونية</li>
+                            <li><strong>PaymentMethod:</strong> طريقة الدفع</li>
+                            <li><strong>MonthlyCharges:</strong> الرسوم الشهرية</li>
+                            <li><strong>TotalCharges:</strong> إجمالي الرسوم</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="data-sample">
+                    <h3>عينة من البيانات</h3>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Gender</th>
+                                    <th>Age Group</th>
+                                    <th>Tenure (months)</th>
+                                    <th>Internet Service</th>
+                                    <th>Monthly Charges</th>
+                                    <th>Churn</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Male</td>
+                                    <td>Senior</td>
+                                    <td>2</td>
+                                    <td>Fiber optic</td>
+                                    <td>$65.00</td>
+                                    <td><span class="badge badge-danger">Yes</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Female</td>
+                                    <td>Adult</td>
+                                    <td>34</td>
+                                    <td>DSL</td>
+                                    <td>$56.05</td>
+                                    <td><span class="badge badge-success">No</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Male</td>
+                                    <td>Adult</td>
+                                    <td>2</td>
+                                    <td>Fiber optic</td>
+                                    <td>$73.90</td>
+                                    <td><span class="badge badge-danger">Yes</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Female</td>
+                                    <td>Senior</td>
+                                    <td>45</td>
+                                    <td>DSL</td>
+                                    <td>$42.30</td>
+                                    <td><span class="badge badge-success">No</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Content Sections -->
+            <div class="content-wrapper">
+                <!-- Data Section -->
+                <section id="data" class="content-section active">
+                    <div class="section-header">
+                        <h2>معلومات البيانات</h2>
+                        <p>تفاصيل شاملة عن مجموعة البيانات المستخدمة في المشروع</p>
+                    </div>
+
+                    <div class="data-overview">
+                        <div class="overview-card">
+                            <h3>نظرة عامة على البيانات</h3>
+                            <div class="overview-content">
+                                <div class="overview-item">
+                                    <span class="label">مصدر البيانات:</span>
+                                    <span class="value">IBM Sample Data Sets - Telco Customer Churn</span>
+                                </div>
+                                <div class="overview-item">
+                                    <span class="label">عدد الصفوف:</span>
+                                    <span class="value">7,043 عميل</span>
+                                </div>
+                                <div class="overview-item">
+                                    <span class="label">عدد الأعمدة:</span>
+                                    <span class="value">21 عمود (20 بعد الحذف)</span>
+                                </div>
+                                <div class="overview-item">
+                                    <span class="label">نوع البيانات:</span>
+                                    <span class="value">بيانات تصنيفية وعددية مختلطة</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="overview-card">
+                            <h3>المتغير المستهدف (Target)</h3>
+                            <div class="overview-content">
+                                <div class="overview-item">
+                                    <span class="label">Churn:</span>
+                                    <span class="value">يشير إلى ما إذا ترك العميل الخدمة في الشهر الأخير
+                                        (نعم/لا)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="data-categories">
+                        <div class="category-card">
+                            <div class="category-header">
+                                <h3>المعلومات الديموغرافية</h3>
+                                <span class="count">4 أعمدة</span>
+                            </div>
+                            <ul class="category-list">
+                                <li><strong>Gender:</strong> جنس العميل (ذكر/أنثى)</li>
+                                <li><strong>SeniorCitizen:</strong> هل العميل من كبار السن (1/0)</li>
+                                <li><strong>Partner:</strong> هل للعميل شريك (نعم/لا)</li>
+                                <li><strong>Dependents:</strong> هل للعميل معالون (نعم/لا)</li>
+                            </ul>
+                        </div>
+
+                        <div class="category-card">
+                            <div class="category-header">
+                                <h3>الخدمات المشتركة</h3>
+                                <span class="count">9 أعمدة</span>
+                            </div>
+                            <ul class="category-list">
+                                <li><strong>PhoneService:</strong> خدمة الهاتف</li>
+                                <li><strong>MultipleLines:</strong> خطوط متعددة</li>
+                                <li><strong>InternetService:</strong> مزود خدمة الإنترنت (DSL/Fiber/لا)</li>
+                                <li><strong>OnlineSecurity:</strong> الأمان عبر الإنترنت</li>
+                                <li><strong>OnlineBackup:</strong> النسخ الاحتياطي عبر الإنترنت</li>
+                                <li><strong>DeviceProtection:</strong> حماية الأجهزة</li>
+                                <li><strong>TechSupport:</strong> الدعم الفني</li>
+                                <li><strong>StreamingTV:</strong> بث التلفزيون</li>
+                                <li><strong>StreamingMovies:</strong> بث الأفلام</li>
+                            </ul>
+                        </div>
+
+                        <div class="category-card">
+                            <div class="category-header">
+                                <h3>معلومات الحساب</h3>
+                                <span class="count">6 أعمدة</span>
+                            </div>
+                            <ul class="category-list">
+                                <li><strong>Tenure:</strong> عدد الأشهر التي بقي فيها العميل</li>
+                                <li><strong>Contract:</strong> نوع العقد (شهري/سنة/سنتين)</li>
+                                <li><strong>PaperlessBilling:</strong> الفوترة الإلكترونية</li>
+                                <li><strong>PaymentMethod:</strong> طريقة الدفع</li>
+                                <li><strong>MonthlyCharges:</strong> الرسوم الشهرية</li>
+                                <li><strong>TotalCharges:</strong> إجمالي الرسوم</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="data-sample">
+                        <h3>عينة من البيانات</h3>
+                        <div class="table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Gender</th>
+                                        <th>Age Group</th>
+                                        <th>Tenure (months)</th>
+                                        <th>Internet Service</th>
+                                        <th>Monthly Charges</th>
+                                        <th>Churn</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Male</td>
+                                        <td>Senior</td>
+                                        <td>2</td>
+                                        <td>Fiber optic</td>
+                                        <td>$65.00</td>
+                                        <td><span class="badge badge-danger">Yes</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Female</td>
+                                        <td>Adult</td>
+                                        <td>34</td>
+                                        <td>DSL</td>
+                                        <td>$56.05</td>
+                                        <td><span class="badge badge-success">No</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Male</td>
+                                        <td>Adult</td>
+                                        <td>2</td>
+                                        <td>Fiber optic</td>
+                                        <td>$73.90</td>
+                                        <td><span class="badge badge-danger">Yes</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Female</td>
+                                        <td>Senior</td>
+                                        <td>45</td>
+                                        <td>DSL</td>
+                                        <td>$42.30</td>
+                                        <td><span class="badge badge-success">No</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Data Cleaning Section -->
+                <section id="cleaning" class="content-section">
+                    <div class="section-header">
+                        <h2>تنظيف البيانات</h2>
+                        <p>المشاكل التي تم اكتشافها والحلول المطبقة</p>
+                    </div>
+
+                    <div class="cleaning-issues">
+                        <div class="issue-card">
+                            <div class="issue-header">
+                                <h3>المشكلة 1: حذف customerID</h3>
+                                <span class="issue-type">تنظيف</span>
+                            </div>
+                            <div class="issue-content">
+                                <p><strong>المشكلة:</strong> عمود customerID لا يحتوي على معلومات مفيدة للتحليل</p>
+                                <p><strong>الحل:</strong></p>
+                                <pre><code>data.drop("customerID", axis=1, inplace=True)</code></pre>
+                                <p><strong>النتيجة:</strong> تم حذف العمود بنجاح، مما يقلل من الضوضاء في البيانات</p>
+                            </div>
+                        </div>
+
+                        <div class="issue-card">
+                            <div class="issue-header">
+                                <h3>المشكلة 2: تحويل TotalCharges</h3>
+                                <span class="issue-type">تحويل النوع</span>
+                            </div>
+                            <div class="issue-content">
+                                <p><strong>المشكلة:</strong> عمود TotalCharges كان من نوع object بدلاً من numeric</p>
+                                <p><strong>الحل:</strong></p>
+                                <pre><code>data['TotalCharges'] = pd.to_numeric(data.TotalCharges, errors='coerce')</code></pre>
+                                <p><strong>النتيجة:</strong> تم تحويل العمود إلى قيم رقمية مع معالجة الأخطاء</p>
+                            </div>
+                        </div>
+
+                        <div class="issue-card">
+                            <div class="issue-header">
+                                <h3>المشكلة 3: القيم المفقودة</h3>
+                                <span class="issue-type">معالجة القيم المفقودة</span>
+                            </div>
+                            <div class="issue-content">
+                                <p><strong>المشكلة:</strong> وجود قيم مفقودة (NaN) في عمود TotalCharges</p>
+                                <p><strong>الحل:</strong></p>
+                                <pre><code>data.isnull().sum()  # التحقق من القيم المفقودة
+data[np.isnan(data['TotalCharges'])]  # عرض الصفوف المفقودة</code></pre>
+                                <p><strong>النتيجة:</strong> تم تحديد 11 صفاً بقيم مفقودة (جميعها لعملاء جدد بـ
+                                    Tenure=0)</p>
+                            </div>
+                        </div>
+
+                        <div class="issue-card">
+                            <div class="issue-header">
+                                <h3>المشكلة 4: ترميز البيانات التصنيفية</h3>
+                                <span class="issue-type">ترميز</span>
+                            </div>
+                            <div class="issue-content">
+                                <p><strong>المشكلة:</strong> البيانات التصنيفية تحتاج إلى تحويل إلى أرقام للنماذج</p>
+                                <p><strong>الحل:</strong></p>
+                                <pre><code>from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+for col in categorical_cols:
+    data[col] = le.fit_transform(data[col])</code></pre>
+                                <p><strong>النتيجة:</strong> تم تحويل جميع الأعمدة التصنيفية إلى قيم رقمية</p>
+                            </div>
+                        </div>
+
+                        <div class="issue-card">
+                            <div class="issue-header">
+                                <h3>المشكلة 5: تطبيع البيانات</h3>
+                                <span class="issue-type">معالجة متقدمة</span>
+                            </div>
+                            <div class="issue-content">
+                                <p><strong>المشكلة:</strong> البيانات لها نطاقات مختلفة جداً (مثلاً Tenure من 0-72 و
+                                    MonthlyCharges من 18-118)</p>
+                                <p><strong>الحل:</strong></p>
+                                <pre><code>from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+data_scaled = scaler.fit_transform(data)</code></pre>
+                                <p><strong>النتيجة:</strong> تم تطبيع جميع الأعمدة لتحسين أداء النماذج</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Models Section -->
+                <section id="models" class="content-section">
+
+                    <div class="section-header">
+                        <h2>النماذج المستخدمة</h2>
+                        <p>اختر نموذجاً لعرض طريقة العمل والنتائج والتحليل</p>
+                    </div>
+
+                    <div class="models-grid">
+
+                        <!-- KMEANS -->
+                        <div class="model-card" data-model="kmeans">
+                            <div class="model-icon">
+                                <i class="fas fa-braille"></i>
+                            </div>
+                            <h3>K-Means Clustering</h3>
+                            <p>تقسيم البيانات إلى مجموعات متشابهة بناءً على المسافة</p>
+                            <button class="btn btn-primary">عرض التفاصيل</button>
+                        </div>
+
+                        <!-- DBSCAN -->
+                        <div class="model-card" data-model="dbscan">
+                            <div class="model-icon">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <h3>DBSCAN</h3>
+                            <p>تجميع النقاط بناءً على الكثافة واكتشاف الضوضاء</p>
+                            <button class="btn btn-primary">عرض التفاصيل</button>
+                        </div>
+
+                        <!-- SOM -->
+                        <div class="model-card" data-model="som">
+                            <div class="model-icon">
+                                <i class="fas fa-map"></i>
+                            </div>
+                            <h3>Self-Organizing Map</h3>
+                            <p>تقليل الأبعاد مع الحفاظ على العلاقات بين البيانات</p>
+                            <button class="btn btn-primary">عرض التفاصيل</button>
+                        </div>
+
+                        <!-- AUTOENCODER -->
+                        <div class="model-card" data-model="autoencoder">
+                            <div class="model-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h3>Graph Autoencoder</h3>
+                            <p>تمثيل البيانات في شكل مضغوط لاستخراج العلاقات المعقدة</p>
+                            <button class="btn btn-primary">عرض التفاصيل</button>
+                        </div>
+
+                    </div>
+
+                    <!-- Modal -->
+                    <div id="modelModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <div id="modelDetails"></div>
+                        </div>
+                    </div>
+
+                </section>
+                <!-- Team Section -->
+                <section id="team" class="content-section">
+                    <div class="section-header">
+                        <h2>فريق المشروع</h2>
+                        <p>أعضاء الفريق والمساهمات</p>
+                    </div>
+
+                    <div class="team-grid">
+                        <div class="team-card">
+                            <div class="team-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <h3> احمد مرسي </h3>
+                            <p class="role"></p>
+                            <p class="contribution">
+                                تحضير وتنظيف البيانات، معالجة القيم المفقودة، وتطوير واجهة المستخدم الخاصة بالنظام
+                            </p>
+                        </div>
+
+                        <div class="team-card">
+                            <div class="team-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <h3> إبراهيم محمد </h3>
+                            <p class="role"></p>
+                            <p class="contribution">
+                                تطبيق نموذج K-Means لتقسيم العملاء إلى Clusters متجانسة وتحليل سلوكهم
+                            </p>
+
+                        </div>
+
+                        <div class="team-card">
+                            <div class="team-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <h3>السيد عبدالسميع </h3>
+                            <p class="role"></p>
+                            <p class="contribution">
+                                تطبيق خوارزمية DBSCAN لتجميع البيانات بناءً على الكثافة واكتشاف النقاط الشاذة (Outliers)
+                            </p>
+
+                        </div>
+                        <div class="team-card">
+                            <div class="team-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <h3> محمد حاتم</h3>
+                            <p class="role">Team Leader</p>
+                            <p class="contribution">
+                                تطبيق نموذج Self-Organizing Map (SOM) لتحليل البيانات وتقسيم العملاء إلى مجموعات مرئية
+                            </p>
+
+                        </div>
+
+                        <div class="team-card">
+                            <div class="team-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <h3>احمد كارم </h3>
+                            <p class="role"></p>
+                            <p class="contribution">
+                                بناء وتدريب نموذج Graph Autoencoder لاستخراج تمثيل البيانات وتحليل العلاقات بين العملاء
+                            </p>
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
