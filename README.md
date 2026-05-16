@@ -76,6 +76,9 @@ Our analysis yielded several critical findings for the business:
 ```bash
 pip install kagglehub pandas numpy matplotlib seaborn scikit-learn minisom torch
 ```
+```bash
+run index.html 
+```
 
 ### Execution
 1. Clone this repository.
