@@ -32,16 +32,16 @@ const modelDetails = {
 kmeans: {
     title: 'K-Means Clustering',
 
-    overview: `خوارزمية Unsupervised Learning بتقسم الداتا إلى مجموعات (Clusters)
-      بناءً على التشابه بين النقاط. تم تطبيق Scaling على البيانات ثم تجربة قيم 
-      مختلفة لـ K من 2 إلى 10 باستخدام Elbow Method و Silhouette Score.`,
+    overview: `An Unsupervised Learning algorithm that segments data into clusters
+      based on similarity. The data was scaled, and different values of K (2–10)
+      were tested using the Elbow Method and Silhouette Score.`,
 
     algorithm: [
-        "تحديد عدد العناقيد K",
-        "اختيار Centroids بشكل عشوائي (k-means++)",
-        "حساب المسافة بين كل نقطة والـ Centroids",
-        "تحديث الـ Centroids بناءً على المتوسط",
-        "التكرار حتى الاستقرار (max 300 iteration)"
+        "Select the number of clusters (K)",
+        "Initialize centroids randomly (k-means++)",
+        "Compute distance between each point and centroids",
+        "Update centroids based on mean values",
+        "Repeat until convergence (max 300 iterations)"
     ],
 
     parameters: {
@@ -62,245 +62,252 @@ kmeans: {
     },
 
     insights: [
-        "الـ Elbow مش واضح جداً لكن Silhouette Score بيأكد إن K=2 هو الأمثل",
-        "Davies-Bouldin = 1.09 → الـ clusters مقبولة التمييز لكن فيه overlap",
-        "فرق الـ Churn 24.4% بين الـ clusters → الموديل قدر يميز بين شريحتين مختلفتين بوضوح",
-        "الـ High Risk بيمثل الغالبية → محتاج استراتيجية retention فورية"
+        "The Elbow curve is not very clear, but the Silhouette Score confirms that K=2 is optimal",
+        "Davies-Bouldin = 1.09 → clusters are reasonably separated but still have some overlap",
+        "Churn difference of 24.4% between clusters → the model successfully distinguishes two segments",
+        "High Risk cluster represents the majority → requires immediate retention strategy"
     ],
 
     images: [
         {
             url: "./images/elbow.png",
             title: "Elbow Method & Silhouette Score",
-            description: "الـ Elbow مش حاد جداً لكن الـ Silhouette Score بيأكد K=2 كأفضل قيمة — بعد K=2 الـ Score بيقل بشكل مستمر من 0.33 لـ 0.13، يعني زيادة الـ clusters مش بتضيف قيمة حقيقية."
+            description: "The elbow is not sharp, but the Silhouette Score clearly indicates K=2 as optimal — after K=2 the score decreases steadily from 0.33 to 0.13, meaning additional clusters do not add value."
         },
         {
             url: "./images/pca.png",
             title: "K-Means vs Actual Churn — PCA 2D",
-            description: "Cluster 1 (Low Risk) منفصل تماماً في الـ PCA space — ده بيأكد إن الموديل قدر يعزل شريحة العملاء المستقرين بوضوح. المقارنة مع الـ Actual Churn بتوضح إن معظم الـ churned customers موجودين في Cluster 0."
+            description: "Cluster 1 (Low Risk) is clearly separated in PCA space — confirming the model successfully isolated stable customers. Most churned customers belong to Cluster 0."
         }
     ]
 },
-    dbscan: {
-        title: 'DBSCAN Clustering',
 
-        overview: `
-    خوارزمية تعتمد على الكثافة (Density-Based) لتجميع البيانات.
-    قادرة على اكتشاف الـ Outliers (Noise) بدون تحديد عدد الـ Clusters مسبقًا.
+dbscan: {
+    title: 'DBSCAN Clustering',
+
+    overview: `
+    A density-based clustering algorithm that groups data based on density.
+    It can detect outliers (noise) without predefining the number of clusters.
   `,
 
-        content: `
-    قمنا بتجربة عدة قيم لـ eps لتحديد أفضل إعداد.
-    أفضل نتيجة كانت عند eps = 3.5 حيث تحقق توازن بين عدد الكلاسترز ونسبة الـ Noise.
+    content: `
+    Multiple eps values were tested to find the optimal configuration.
+    The best result was achieved at eps = 3.5, balancing cluster count and noise ratio.
   `,
 
-        algorithm: [
-            "اختيار eps و min_samples",
-            "تحديد النقاط الأساسية (Core Points)",
-            "تجميع النقاط القريبة بناءً على الكثافة",
-            "تحديد النقاط الشاذة (Noise)",
-            "تكوين الـ Clusters النهائية"
+    algorithm: [
+        "Select eps and min_samples",
+        "Identify core points",
+        "Group nearby points based on density",
+        "Detect noise (outliers)",
+        "Form final clusters"
+    ],
+
+    advantages: [
+        "No need to predefine number of clusters",
+        "Automatically detects outliers",
+        "Effective with irregular data shapes"
+    ],
+
+    disadvantages: [
+        "Sensitive to eps selection",
+        "Weak performance in high-dimensional data",
+        "Can be difficult to interpret"
+    ],
+
+    parameters: {
+        "Epsilon (eps)": "3.5",
+        "Min Samples": "5"
+    },
+
+    results: {
+        "Number of Clusters": "3",
+        "Noise Points": "157 (2.2%)",
+        "Silhouette Score": "0.2939"
+    },
+
+    insights: [
+        "Cluster 1 is the largest and represents the majority of customers",
+        "Cluster 2 has the lowest churn rate (best customers)",
+        "Cluster 0 shows متوسط performance",
+        "Noise represents outliers that require separate analysis"
+    ],
+
+    clusters: [
+        { name: "Noise / Outliers", count: 157, churn: "14%" },
+        { name: "Cluster 0", count: 622, churn: "26.2%" },
+        { name: "Cluster 1", count: 4733, churn: "33.2%" },
+        { name: "Cluster 2", count: 1520, churn: "7.4%" }
+    ],
+
+    images: [
+        "https://images.unsplash.com/photo-1555949963-aa79dcee981c",
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71"
+    ]
+},
+
+som: {
+    title: 'Self-Organizing Map (SOM)',
+
+    overview: `A Neural Network model that maps high-dimensional data into a 2D grid
+    while preserving similarity between customers. A 10×10 grid was trained using
+    U-Matrix, Hit Map, and Churn Map for segmentation analysis.`,
+
+    algorithm: [
+        "Initialize a 2D grid of neurons",
+        "Find the Best Matching Unit (BMU) for each customer",
+        "Update weights based on neighbors",
+        "Repeat until convergence (10,000 iterations)",
+        "Analyze the map and define customer segments"
+    ],
+
+    parameters: {
+        "Grid Size": "10 × 10",
+        "Sigma": "1.5",
+        "Learning Rate": "0.5",
+        "Iterations": "10,000"
+    },
+
+    summary: {
+        kpis: [
+            { label: "Quantization Error", value: "2.93" },
+            { label: "Cells Used", value: "92 / 100" },
+            { label: "Max Customers/Cell", value: "164" },
+            { label: "Avg Churn Overall", value: "26.6%" }
         ],
-
-        advantages: [
-            "لا يحتاج تحديد عدد Clusters مسبقًا",
-            "يكتشف الـ Outliers تلقائيًا",
-            "فعال مع البيانات غير المنتظمة"
+        segments: [
+            { label: "High Risk",   count: 1434, pct: 20.4, churn: 61.1, color: "#ef4444" },
+            { label: "Medium Risk", count: 1665, pct: 23.7, churn: 36.8, color: "#f59e0b" },
+            { label: "Low Risk",    count: 3933, pct: 55.9, churn: 9.7,  color: "#10b981" }
         ],
-
-        disadvantages: [
-            "حساس لاختيار eps",
-            "أداء ضعيف مع البيانات عالية الأبعاد",
-            "صعب التفسير أحيانًا"
-        ],
-
-        parameters: {
-            "Epsilon (eps)": "3.5",
-            "Min Samples": "5"
-        },
-
-        results: {
-            "Number of Clusters": "3",
-            "Noise Points": "157 (2.2%)",
-            "Silhouette Score": "0.2939"
-        },
-
-        // 👇 أهم جزء (تحليل فعلي)
-        insights: [
-            "Cluster 1 هو الأكبر ويمثل أغلب العملاء",
-            "Cluster 2 لديه أقل churn rate (أفضل عملاء)",
-            "Cluster 0 متوسط الأداء",
-            "Noise يمثل حالات شاذة تحتاج تحليل منفصل"
-        ],
-
-        clusters: [
-            { name: "Noise / Outliers", count: 157, churn: "14%" },
-            { name: "Cluster 0", count: 622, churn: "26.2%" },
-            { name: "Cluster 1", count: 4733, churn: "33.2%" },
-            { name: "Cluster 2", count: 1520, churn: "7.4%" }
-        ],
-
-        images: [
-            "https://images.unsplash.com/photo-1555949963-aa79dcee981c",
-            "https://images.unsplash.com/photo-1551288049-bebda4e38f71"
+        topCells: [
+            { cell: "(8,2)", customers: 102, churn: "74.5%" },
+            { cell: "(9,1)", customers: 103, churn: "72.8%" },
+            { cell: "(9,3)", customers: 104, churn: "72.1%" },
+            { cell: "(0,6)", customers: 22,  churn: "9.1%"  },
+            { cell: "(3,9)", customers: 68,  churn: "8.8%"  }
         ]
     },
-   som: {
-  title: 'Self-Organizing Map (SOM)',
 
-  overview: `نموذج Neural Network بيحوّل البيانات عالية الأبعاد إلى خريطة ثنائية (2D Grid)
-    مع الحفاظ على التشابه بين العملاء. تم تدريب SOM بحجم 10×10 Grid باستخدام
-    U-Matrix و Hit Map و Churn Map لتحليل توزيع العملاء.`,
-
-  algorithm: [
-    "تهيئة شبكة ثنائية الأبعاد من Neurons",
-    "تحديد أقرب Neuron لكل عميل (Winner)",
-    "تحديث الأوزان بناءً على الجيران",
-    "تكرار العملية حتى الاستقرار (10,000 iteration)",
-    "تحليل الخريطة وتصنيف العملاء في segments"
-  ],
-
-  parameters: {
-    "Grid Size": "10 × 10",
-    "Sigma": "1.5",
-    "Learning Rate": "0.5",
-    "Iterations": "10,000"
-  },
-
-  summary: {
-    kpis: [
-      { label: "Quantization Error", value: "2.93" },
-      { label: "Cells Used", value: "92 / 100" },
-      { label: "Max Customers/Cell", value: "164" },
-      { label: "Avg Churn Overall", value: "26.6%" }
+    insights: [
+        "Low Risk represents more than half of customers (55.9%) → strong stable base",
+        "High Risk is only 20.4% but with 61.1% churn → top retention priority",
+        "U-Matrix reveals clear boundaries between clusters",
+        "Cells (8,2) and (9,1) are highest risk → churn above 72% with 100+ customers each",
+        "92 out of 100 cells are utilized → excellent data coverage"
     ],
-    segments: [
-      { label: "High Risk",   count: 1434, pct: 20.4, churn: 61.1, color: "#ef4444" },
-      { label: "Medium Risk", count: 1665, pct: 23.7, churn: 36.8, color: "#f59e0b" },
-      { label: "Low Risk",    count: 3933, pct: 55.9, churn: 9.7,  color: "#10b981" }
-    ],
-    topCells: [
-      { cell: "(8,2)", customers: 102, churn: "74.5%" },
-      { cell: "(9,1)", customers: 103, churn: "72.8%" },
-      { cell: "(9,3)", customers: 104, churn: "72.1%" },
-      { cell: "(0,6)", customers: 22,  churn: "9.1%"  },
-      { cell: "(3,9)", customers: 68,  churn: "8.8%"  }
+
+    images: [
+        {
+            url: "./images/som_pca.png",
+            title: "SOM Customer Segmentation — PCA 2D & Segment Distribution",
+            description: "Low Risk (green) is clearly separated in PCA space, especially on the right. High Risk (red) and Medium Risk (yellow) overlap on the left, indicating gradual differences."
+        },
+        {
+            url: "./images/som_grid.png",
+            title: "Self-Organizing Map — 10×10 Grid Analysis",
+            description: "U-Matrix shows cluster boundaries. Hit Map confirms balanced distribution. Churn Map highlights high-risk zones reaching 75% churn."
+        },
+        {
+            url: "./images/som_qe_te.png",
+            title: "Quantization Error & Topographic Error",
+            description: "Quantization Error = 2.93 indicates acceptable mapping. Topographic Error = 0.2244 means 22.4% distortion — acceptable for 10×10 grid."
+        }
     ]
-  },
-
-  insights: [
-    "Low Risk يمثل أكثر من نص العملاء (55.9%) → قاعدة مستقرة قوية",
-    "High Risk رغم إنه 20.4% بس بـ churn 61.1% → أولوية قصوى للـ retention",
-    "الـ U-Matrix بيكشف إن فيه حدود واضحة بين الـ clusters في الـ grid",
-    "Cells (8,2) و(9,1) الأعلى خطورة → churn فوق 72% مع أكثر من 100 عميل في كل cell",
-    "92 من 100 cell مستخدمة → الـ SOM غطى البيانات بشكل ممتاز"
-  ],
-
-  images: [
-    {
-      url: "./images/som_pca.png",
-      title: "SOM Customer Segmentation — PCA 2D & Segment Distribution",
-      description: "الـ PCA بيوضح إن الـ Low Risk (أخضر) منفصل تماماً في الـ space — خصوصاً الـ cluster اليميني المنعزل. الـ High Risk (أحمر) والـ Medium Risk (أصفر) متداخلين في المنطقة اليسارية، وده منطقي لأن الفرق بينهم تدريجي مش حاد."
-    },
-    {
-      url: "./images/som_grid.png",
-      title: "Self-Organizing Map — 10×10 Grid Analysis",
-      description: "الـ U-Matrix بيوضح الحدود بين الـ clusters (المناطق الداكنة). الـ Hit Map بيأكد إن التوزيع متوازن — أكتر cell فيها 164 عميل. الـ Churn Map بيكشف إن الـ cells في الركن الأيسر السفلي الأعلى خطورة بـ churn يوصل لـ 75%."
-    }
-  ]
 },
+
 autoencoder: {
-  title: 'Autoencoder — Anomaly Detection & Clustering',
+    title: 'Autoencoder — Anomaly Detection & Clustering',
 
-  overview: `نموذج Deep Learning بيتعلم يضغط 30 feature في 8 بس (Bottleneck)
-    ثم يعيد بناءها. العملاء اللي الموديل بيفشل في إعادة بنائهم بدقة → Anomalies.
-    بعد كده استخدمنا الـ Embeddings في KMeans Clustering لتقسيم العملاء.`,
+    overview: `A Deep Learning model that compresses 30 features into 8 (bottleneck)
+    and reconstructs them. Customers with high reconstruction error are anomalies.
+    Embeddings were then clustered using KMeans (K=2).`,
 
-  algorithm: [
-    "ضغط الـ 30 feature في Bottleneck بحجم 8",
-    "إعادة البناء (Reconstruction) والمقارنة بالأصل",
-    "حساب Reconstruction Error لكل عميل",
-    "تحديد Threshold (p95 = 0.306) لتصنيف الـ Anomalies",
-    "تطبيق KMeans على الـ Embeddings (Best K=2)"
-  ],
+    algorithm: [
+        "Compress 30 features into bottleneck (size 8)",
+        "Reconstruct and compare with original",
+        "Compute reconstruction error per customer",
+        "Define anomaly threshold (p95 = 0.306)",
+        "Apply KMeans on embeddings (Best K=2)"
+    ],
 
-  parameters: {
-    "Architecture": "30 → 16 → 8 → 16 → 30",
-    "Bottleneck Size": "8",
-    "Epochs": "100",
-    "Threshold (p95)": "0.306"
-  },
-
-  summary: {
-    training: {
-      lossStart: "0.97",
-      lossFinal: "0.22"
+    parameters: {
+        "Architecture": "30 → 16 → 8 → 16 → 30",
+        "Bottleneck Size": "8",
+        "Epochs": "100",
+        "Threshold (p95)": "0.306"
     },
-    anomaly: {
-      threshold: "0.306 (p95)",
-      rows: [
-        { label: "Normal",  count: 6680, pct: "95%", churn: "27.3%", tenure: "32 mo", monthly: "$64", total: "$2,241" },
-        { label: "Anomaly", count: 352,  pct: "5%",  churn: "13.6%", tenure: "38 mo", monthly: "$79", total: "$3,088" }
-      ],
-      thresholds: [
-        { name: "p90", value: "0.270", count: "704 (10%)",  churn: "17.3%" },
-        { name: "p92", value: "0.284", count: "563 (8%)",   churn: "16.9%" },
-        { name: "p95", value: "0.306", count: "352 (5%)",   churn: "13.6%" },
-        { name: "p97", value: "0.330", count: "211 (3%)",   churn: "14.7%" },
-        { name: "p99", value: "0.371", count: "71 (1%)",    churn: "11.3%" }
-      ]
+
+    summary: {
+        training: {
+            lossStart: "0.97",
+            lossFinal: "0.22"
+        },
+        anomaly: {
+            threshold: "0.306 (p95)",
+            rows: [
+                { label: "Normal",  count: 6680, pct: "95%", churn: "27.3%", tenure: "32 mo", monthly: "$64", total: "$2,241" },
+                { label: "Anomaly", count: 352,  pct: "5%",  churn: "13.6%", tenure: "38 mo", monthly: "$79", total: "$3,088" }
+            ],
+            thresholds: [
+                { name: "p90", value: "0.270", count: "704 (10%)",  churn: "17.3%" },
+                { name: "p92", value: "0.284", count: "563 (8%)",   churn: "16.9%" },
+                { name: "p95", value: "0.306", count: "352 (5%)",   churn: "13.6%" },
+                { name: "p97", value: "0.330", count: "211 (3%)",   churn: "14.7%" },
+                { name: "p99", value: "0.371", count: "71 (1%)",    churn: "11.3%" }
+            ]
+        },
+        clusters: [
+            { label: "Cluster 0 — Low Risk",  count: 2329, pct: 33.1, churn: 14.6, color: "#6366f1" },
+            { label: "Cluster 1 — High Risk", count: 4703, pct: 66.9, churn: 32.5, color: "#ef4444" }
+        ]
     },
-    clusters: [
-      { label: "Cluster 0 — Low Risk",  count: 2329, pct: 33.1, churn: 14.6, color: "#6366f1" },
-      { label: "Cluster 1 — High Risk", count: 4703, pct: 66.9, churn: 32.5, color: "#ef4444" }
+
+    insights: [
+        "Anomalies are not risky customers — they are premium customers with higher tenure and spending",
+        "Best business threshold is p90 → covers 704 customers with 17.3% churn and better actionability",
+        "Cluster 1 represents 66.9% with 32.5% churn → highest priority for retention",
+        "Cluster 0 is stable with 14.6% churn → requires maintenance, not urgent action",
+        "Loss decreased smoothly from 0.97 to 0.22 → model learned patterns effectively"
+    ],
+
+    images: [
+        {
+            url: "./images/ae_loss.png",
+            title: "Autoencoder — Training Loss",
+            description: "Loss decreased smoothly from 0.97 to 0.22 across 100 epochs — no overfitting, stable learning."
+        },
+        {
+            url: "./images/ae_reconstruction_dist.png",
+            title: "Reconstruction Error Distribution",
+            description: "Churned customers tend to have higher error, but overlap exists. Threshold at 0.306 captures top 5% anomalies."
+        },
+        {
+            url: "./images/ae_anomaly_pca.png",
+            title: "Anomalies in PCA 2D Space",
+            description: "Anomalies are clustered in a specific region — confirming they represent a real segment, not noise."
+        },
+        {
+            url: "./images/ae_error_customers.png",
+            title: "Reconstruction Error — per Customer",
+            description: "Error is low for most customers, then spikes sharply in top 5% — anomalies are clearly separable."
+        },
+        {
+            url: "./images/ae_embeddings_kmeans.png",
+            title: "AE Embeddings — KMeans K=2",
+            description: "Clusters are clearly separated in embedding space — better than raw features."
+        },
+        {
+            url: "./images/ae_anomaly_ae_space.png",
+            title: "Anomalies on AE Space (p95)",
+            description: "Anomalies are more spread in AE space — expected since error is computed in original space."
+        },
+        {
+            url: "./images/ae_churn_per_cluster.png",
+            title: "Churn Rate per AE Cluster",
+            description: "Clear difference: 32.5% vs 14.6% — confirms strong segmentation."
+        }
     ]
-  },
-
-  insights: [
-    "الـ Anomalies مش عملاء خطرين — هم Premium Customers بـ tenure أعلى وإنفاق أعلى وchurn أقل",
-    "الـ Threshold الأمثل للبيزنس هو p90 → يغطي 704 عميل بـ churn 17.3% وأكثر قابلية للتنفيذ",
-    "Cluster 1 يمثل 66.9% من العملاء بـ churn 32.5% → أولوية قصوى للـ retention",
-    "Cluster 0 عملاء مستقرين بـ churn 14.6% → يحتاج maintenance مش تدخل عاجل",
-    "الـ Loss انخفض من 0.97 لـ 0.22 بسلاسة → الموديل تعلم الـ patterns بشكل صح"
-  ],
-
-  images: [
-    {
-      url: "./images/ae_loss.png",
-      title: "Autoencoder — Training Loss",
-      description: "الـ Loss بدأ من 0.97 وانخفض بسلاسة لـ 0.22 خلال 100 epoch — مفيش overfitting أو instability، ده بيأكد إن الموديل تعلم الـ patterns الأساسية في البيانات صح."
-    },
-    {
-      url: "./images/ae_reconstruction_dist.png",
-      title: "Reconstruction Error Distribution",
-      description: "الـ Churned customers (أحمر) عندهم Reconstruction Error أعلى بشكل عام — بس الـ overlap كبير. الـ Threshold عند 0.306 بيمسك الـ 5% الأعلى error وهم الـ Premium Customers."
-    },
-    {
-      url: "./images/ae_anomaly_pca.png",
-      title: "Anomalies in PCA 2D Space",
-      description: "الـ Anomalies (أحمر) متمركزة في منطقة معينة من الـ PCA space — مش موزعة عشوائياً. ده بيأكد إن الموديل اكتشف شريحة متميزة فعلاً مش مجرد noise."
-    },
-    {
-      url: "./images/ae_error_customers.png",
-      title: "Reconstruction Error — per Customer",
-      description: "الـ Error منخفض جداً لمعظم العملاء ثم يقفز فجأة في آخر 5% — الخط المتقطع عند 0.306 بيوضح إن الـ anomalies واضحة ومنفصلة عن الباقي."
-    },
-    {
-      url: "./images/ae_embeddings_kmeans.png",
-      title: "AE Embeddings — KMeans K=2",
-      description: "الـ Cluster 0 (أزرق) و Cluster 1 (أحمر) منفصلين بوضوح في الـ Embedding space — ده أقوى من الـ raw features لأن الـ Autoencoder عمل تمثيل أذكى للبيانات."
-    },
-    {
-      url: "./images/ae_anomaly_ae_space.png",
-      title: "Anomalies on AE Space (p95)",
-      description: "الـ Anomalies في الـ AE space موزعة أكثر من PCA — ده طبيعي لأن الـ Reconstruction Error بيتحسب في الـ original space مش في الـ embedding space."
-    },
-    {
-      url: "./images/ae_churn_per_cluster.png",
-      title: "Churn Rate per AE Cluster",
-      description: "الفرق واضح — Cluster 1 بـ churn 32.5% مقابل Cluster 0 بـ 14.6%. فرق 17.9% بيأكد إن الـ Autoencoder Embeddings قدرت تميز بين شريحتين مختلفتين بشكل فعلي."
-    }
-  ]
 }
 };
 
@@ -340,7 +347,7 @@ function showModelDetails(model) {
     `;
   }
 
-  // Content (للموديلات التانية اللي عندها content)
+  // Content (للموديلات التانية اللي عندا content)
   if (model.content) {
     html += `
       <div class="section">
@@ -374,7 +381,7 @@ function showModelDetails(model) {
     `;
   }
 
-  // Results (للموديلات التانية اللي معندهاش summary)
+  // Results (للموديلات التانية اللي معنداش summary)
   if (model.results && !model.summary) {
     html += `
       <div class="section">
@@ -566,7 +573,7 @@ function showModelDetails(model) {
     `;
   }
 
-  // ✅ الصور في الآخر — كل صورة مع عنوانها ووصفها
+  // ✅ الصور في الآخر — كل صورة مع عنوانا ووصفا
   if (model.images?.length > 0) {
     const isObjectImages = typeof model.images[0] === 'object';
 
@@ -600,7 +607,7 @@ function showModelDetails(model) {
       html += `</div>`;
 
     } else {
-      // الموديلات التانية اللي لسه بتستخدم string URLs
+      // الموديلات التانية اللي لس بتستخدم string URLs
       html += `
         <div class="image-slider">
           ${model.images.map(img => `<img src="${img}" />`).join('')}

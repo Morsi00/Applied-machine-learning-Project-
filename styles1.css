@@ -391,7 +391,7 @@ body {
 
 .data-table th {
     padding: 1rem;
-    text-align: right;
+    text-align: left;
     font-weight: 600;
     color: var(--primary-color);
 }
