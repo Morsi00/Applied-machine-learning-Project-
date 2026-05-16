@@ -92,7 +92,7 @@ run index.html
 
 | Name | Primary Contribution |
 | :--- |  :--- |
-| **Mohamed Hatem (Team leader)** |  SOM Implementation & Data Visualization |
+| **Mohamed Hatem (Team leader)** |  SOM Implementation |
 | **Ahmed Morsi** |  Preprocessing, UI Development |
 | **Ibrahim Mohamed** |  K-Means Clustering & Behavioral Analysis |
 | **Elsayed Abdelsamea** |  DBSCAN & Outlier Detection |
