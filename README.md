@@ -21,7 +21,7 @@ The project uses the **Telco Customer Churn** dataset, which provides a 360-degr
 ### Data Categories
 | Category | Features |
 | :--- | :--- |
-| **Demographics** | Gender, Senior Citizen status, Partner, Dependents |
+| **Demographics** | Gender, Senior Citizen status|
 | **Services** | Phone, Multiple Lines, Internet (DSL/Fiber), Online Security, Backup, Protection, Tech Support, Streaming TV/Movies |
 | **Account Info** | Tenure, Contract type, Paperless Billing, Payment Method, Monthly Charges, Total Charges |
 | **Target** | **Churn** (Yes/No) |
@@ -62,7 +62,6 @@ Our analysis yielded several critical findings for the business:
 > **Cluster 3** is the highest priority. 40-50% of customers in this group are at risk of churning.
 
 - **VIP Identification**: Cluster 1 was identified as containing "Premium" customers. While they may not always show high churn risk, their unique behavior makes them high-value assets that require specialized maintenance.
-- **Optimal Strategy**: We found that setting an anomaly threshold at the **90th percentile (p90)** provides the most actionable balance for business interventions.
 
 ---
 
@@ -94,9 +93,9 @@ run index.html
 | :--- |  :--- |
 | **Mohamed Hatem (Team leader)** |  SOM Implementation |
 | **Ahmed Morsi** |  Preprocessing, UI Development |
-| **Ibrahim Mohamed** |  K-Means Clustering & Behavioral Analysis |
-| **Elsayed Abdelsamea** |  DBSCAN & Outlier Detection |
-| **Ahmed Karem** |  Graph Autoencoder & Latent Representation |
+| **Ibrahim Mohamed** |  K-Means Clustering  |
+| **Elsayed Abdelsamea** |  DBSCAN  |
+| **Ahmed Karem** |  Graph Autoencoder  |
 
 ---
 
