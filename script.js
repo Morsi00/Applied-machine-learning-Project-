@@ -302,16 +302,8 @@ autoencoder: {
             title: "Reconstruction Error Distribution",
             description: "Churned customers tend to have higher error, but overlap exists. Threshold at 0.306 captures top 5% anomalies."
         },
-        {
-            url: "./images/ae_anomaly_pca.png",
-            title: "Anomalies in PCA 2D Space",
-            description: "Anomalies are clustered in a specific region — confirming they represent a real segment, not noise."
-        },
-        {
-            url: "./images/ae_error_customers.png",
-            title: "Reconstruction Error — per Customer",
-            description: "Error is low for most customers, then spikes sharply in top 5% — anomalies are clearly separable."
-        },
+       
+       
         {
             url: "./images/ae_embeddings_kmeans.png",
             title: "AE Embeddings — KMeans K=2",
