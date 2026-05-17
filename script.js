@@ -141,8 +141,28 @@ dbscan: {
     ],
 
     images: [
-        "https://images.unsplash.com/photo-1555949963-aa79dcee981c",
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71"
+{
+    "url": "./images/k_distance_plot_elbow.png",
+    "title": "K-Distance Plot (k=5)",
+    "description": "The sorted 5-nearest neighbor distances show a clear elbow or threshold change. The suggested eps is set at 3.5, effectively separating core dense points from sparse, high-distance noise points."
+},
+{
+    "url": "./images/dbscan_grid_search.png",
+    "title": "DBSCAN — Grid Search Results",
+    "description": "As eps increases, the number of clusters drastically drops and stabilizes, while the noise percentage falls well below the 20% threshold. At the suggested eps = 3.5, the model reaches a steady state with a minimal, controlled amount of noise."
+},
+{
+    "url": "./images/silhouette_eps.png",
+    "title": "Silhouette Score vs eps — Fine-Grained Search",
+    "description": "The Silhouette Score peaks near eps = 3.6. The suggested eps is set to 3.50, achieving a high score of 0.2939, which indicates an optimal balance between cluster cohesion and separation."
+},
+
+{
+    "url": "./images/dbscan_final_clusters.png",
+    "title": "DBSCAN Clusters & Outlier Detection (eps=3.5)",
+    "description": "The final DBSCAN model identifies 3 distinct clusters projected onto PCA space, with Cluster 2 (green) completely isolated on the right. The accompanying plot highlights 157 detected outliers (red points) primarily concentrated in the overlapping region of the main dense structures."
+}
+
     ]
 },
 
